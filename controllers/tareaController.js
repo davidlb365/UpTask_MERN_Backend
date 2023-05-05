@@ -94,7 +94,6 @@ const cambiarEstado = async (req, res) => {
         const error = new Error('Acción no válida')
         return res.status(403).json({msg: error.message})
     }
-    console.log(tarea.estado)
     try {
         tarea.estado = !tarea.estado
         tarea.completado = req.usuario._id

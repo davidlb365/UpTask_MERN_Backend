@@ -63,10 +63,10 @@ io.on('connection', (socket) => {
         socket.to(tarea.proyecto).emit('tarea agregada', tarea)
     })
     socket.on('eliminar tarea', tarea => {
-        socket.to(tarea.proyecto).emit('tarea eliminada', tarea)
+        (typeof tarea.proyecto === 'string') ? socket.to(tarea.proyecto).emit('tarea eliminada', tarea) : socket.to(tarea.proyecto?._id).emit('tarea eliminada', tarea)
     })
     socket.on('actualizar tarea', tarea => {
-        socket.to(tarea.proyecto._id).emit('tarea actualizada', tarea)
+        socket.to(tarea.proyecto).to(tarea.proyecto._id).emit('tarea actualizada', tarea)
     })
     socket.on('cambiar estado', tarea => {
         socket.to(tarea.proyecto._id).emit('nuevo estado', tarea)
