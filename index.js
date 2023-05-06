@@ -71,4 +71,10 @@ io.on('connection', (socket) => {
     socket.on('cambiar estado', tarea => {
         socket.to(tarea.proyecto._id).emit('nuevo estado', tarea)
     })
+    socket.on('agregar colaborador', (colaborador, id) => {
+        socket.to(id).emit('colaborador agregado', colaborador)
+    })
+    socket.on('eliminar colaborador', (colaborador, id) => {
+        socket.to(id).emit('colaborador eliminado', colaborador)
+    })
 })
